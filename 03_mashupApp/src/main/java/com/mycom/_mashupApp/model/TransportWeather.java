@@ -21,10 +21,10 @@ public class TransportWeather implements Serializable {
         private Long id;
 
         @NotNull
-        private Object connection;
+        private Connection connection;
 
         @NotNull
-        private Object weather;
+        private Weather weather;
 
         public Long getId() {
             return id;
@@ -38,7 +38,7 @@ public class TransportWeather implements Serializable {
             return connection;
         }
 
-        public void setConnection(Object connection) {
+        public void setConnection(Connection connection) {
             this.connection = connection;
         }
 
@@ -46,7 +46,7 @@ public class TransportWeather implements Serializable {
             return weather;
         }
 
-        public void setWeather(Object weather) {
+        public void setWeather(Weather weather) {
             this.weather = weather;
         }
 }

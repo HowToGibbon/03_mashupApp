@@ -6,6 +6,11 @@
         <element id="directory" name="classes">
           <element id="module-output" name="03_mashupApp" />
         </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="03_mashupApp-0.0.1-SNAPSHOT.jar">
+            <element id="module-output" name="03_mashupApp" />
+          </element>
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/03_mashupApp/META-INF/MANIFEST.MF" />

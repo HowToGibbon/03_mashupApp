@@ -1,4 +1,4 @@
-package com.company;
+package com.mycom._mashupApp.model;
 
 /**
  * Created by 5ia15nipetkovic on 01.02.2018.

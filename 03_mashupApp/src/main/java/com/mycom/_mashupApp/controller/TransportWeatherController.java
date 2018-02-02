@@ -21,7 +21,12 @@ public class TransportWeatherController {
     @Named
     private TransportWeather TWResult;
 
-    public void postQuery(String startplace, String Endplace){
+    @Named
+    private String departure;
+
+    @Named String arrival;
+
+    public void postQuery(String departure, String arrival){
         TWResult = new TransportWeather();
     }
 

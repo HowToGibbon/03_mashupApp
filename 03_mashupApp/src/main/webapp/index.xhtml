@@ -30,68 +30,65 @@
     <ui:define name="content">
 
         <h:form id="reg">
-            <div id="map"></div>
-            <h2>Member Registration</h2>
-            <p>Enforces annotation-based constraints defined on the
-                model class.</p>
+            <h2>Transport and Weatger</h2>
+            <p>type in your locations and your connections plus weater will be displayed</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{newMember.name}" />
-                <h:message for="name" errorClass="invalid" />
+                <h:outputLabel for="departure" value="departure:" />
+                <h:inputText id="departure" value="#{transportWeatherController.departure}" />
 
-                <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{newMember.email}" />
-                <h:message for="email" errorClass="invalid" />
-
-                <h:outputLabel for="phoneNumber" value="Phone #:" />
-                <h:inputText id="phoneNumber"
-                    value="#{newMember.phoneNumber}" />
-                <h:message for="phoneNumber" errorClass="invalid" />
+                <h:outputLabel for="arrival" value="arrival:" />
+                <h:inputText id="arrival" value="#{transportWeatherController.arrival}" />
             </h:panelGrid>
-
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{memberController.register}"
-                        value="Register" styleClass="register" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
+                        action="#{transportWeatherController.postQuery(transportWeatherController.departure, transportWeatherController.arrival)}"
+                        value="post" styleClass="register" />
                 </h:panelGrid>
             </p>
         </h:form>
-        <h2>Members</h2>
-        <h:panelGroup rendered="#{empty members}">
-            <em>No registered members.</em>
+        <h2>connections</h2>
+        <h:panelGroup rendered="#{empty TWResult.connection}">
+            <em>No Connections.</em>
         </h:panelGroup>
-        <h:dataTable var="_member" value="#{members}"
-            rendered="#{not empty members}"
+        <h:dataTable var="_TWResult" value="#{TWResult.connection}"
+            rendered="#{not empty TWResult.connection}"
             styleClass="simpletablestyle">
             <h:column>
-                <f:facet name="header">Id</f:facet>
-                #{_member.id}
+                <f:facet name="header">departure</f:facet>
+                #{_TWResult.departure}
             </h:column>
             <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{_member.name}
+                <f:facet name="header">arrival</f:facet>
+                #{_TWResult.arrival}
             </h:column>
             <h:column>
-                <f:facet name="header">Email</f:facet>
-                #{_member.email}
+                <f:facet name="header">platform</f:facet>
+                #{_TWResult.platform}
             </h:column>
             <h:column>
-                <f:facet name="header">Phone #</f:facet>
-                #{_member.phoneNumber}
+                <f:facet name="header">duration</f:facet>
+                #{_TWResult.duration}
             </h:column>
-            <h:column>
-                <f:facet name="header">REST URL</f:facet>
-                <a
-                    href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
-            </h:column>
-            <f:facet name="footer">
-            REST URL for all members: <a
-                    href="#{request.contextPath}/rest/members">/rest/members</a>
-            </f:facet>
+
         </h:dataTable>
+        <div id="aside">
+            <h:dataTable var="_TWResult" value="#{TWResult.weather}"
+                         rendered="#{not empty TWResult.weather}"
+                         styleClass="simpletablestyle">
+                <h:column>
+                    <f:facet name="header">mainTitle</f:facet>
+                    #{_TWResult.mainTitle}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">description</f:facet>
+                    #{_TWResult.description}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">temp</f:facet>
+                    #{_TWResult.temp}
+                </h:column>
+            </h:dataTable>
+        </div>
     </ui:define>
 </ui:composition>
